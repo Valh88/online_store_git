@@ -24,21 +24,21 @@ class Order(models.Model):
     delivery = models.CharField(max_length=1, verbose_name='type delivery', choices=TYPE_DELIVERY, default='p')
     city = models.CharField(max_length=20, verbose_name='city')
     address = models.CharField(max_length=40, verbose_name='address')
-    type_pay = models.CharField(max_length=1, choices=STATUS_TYPE_PAY, verbose_name='type pay', default='c')
+    type_pay = models.CharField(max_length=1, choices=STATUS_TYPE_PAY, verbose_name='type pay', default='o')
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=STATUS_PAY, verbose_name='status pay', default='w')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='price', default=0)
 
-    def status_pay_render(self):
-        if self.status == 'o':
+    def type_pay_render(self):
+        if self.type_pay == 'o':
             return 'с онлайн карты'
         else:
             return 'с чужой карты'
 
-    def type_pay_render(self):
-        if self.type_pay == 'p':
+    def status_pay_render(self):
+        if self.status == 'p':
             return 'оплачено'
-        elif self.type_pay == 'e':
+        elif self.status == 'e':
             return 'ошибка оплаты'
         else:
             return 'ожидает оплаты'

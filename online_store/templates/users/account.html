@@ -58,6 +58,7 @@
             <div class="Account-group">
               <div class="Account-column Account-column_full">
                 <div class="Order Order_anons">
+                  {% if request.user.orders.all %}
                   <div class="Order-personal">
                     {% with request.user.orders.all|first as order %}
                     <div class="row">
@@ -93,6 +94,7 @@
                       </div>
                     </div> {% endwith %}
                   </div>
+                  {% endif %}
                 </div>
               </div>
             </div>

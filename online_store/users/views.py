@@ -9,7 +9,7 @@ from .forms import UpdateProfileForm
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from orders.models import Order
+
 
 class RegisterView(generic.CreateView):
     form_class = RegisterForm
@@ -95,7 +95,5 @@ class HistoryDetailOrder(generic.DetailView, LoginRequiredMixin):
     context_object_name = 'order'
 
     def get_queryset(self):
-        order = self.request.user.orders.first()
-        # print(order.item.name, order.item.description)
         return self.request.user.orders.all()
 

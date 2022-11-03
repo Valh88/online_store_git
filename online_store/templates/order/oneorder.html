@@ -13,7 +13,7 @@
           <ul class="breadcrumbs Middle-breadcrumbs">
             <li class="breadcrumbs-item"><a href="{% url 'index' %}">home</a>
             </li>
-            <li class="breadcrumbs-item"><a href="historyorder.html">История заказов</a>
+            <li class="breadcrumbs-item"><a href="{% url 'history_order' %}">История заказов</a>
             </li>
             <li class="breadcrumbs-item breadcrumbs-item_current"><span>Заказ №200</span>
             </li>
@@ -87,11 +87,13 @@
                       <div class="Order-infoContent">Не оплачен
                       </div>
                     </div>
+                    {% if order.status == 'e' %}
                     <div class="Order-info Order-info_error">
                       <div class="Order-infoType">Оплата не прошла:
                       </div>
-                      <div class="Order-infoContent">Оплата не выполнена, т.к. вы подозреваетесь в нетолерантности
+                      <div class="Order-infoContent">Ошибка такая то
                       </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>

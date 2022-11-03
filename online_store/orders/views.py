@@ -1,27 +1,23 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
-from .forms import OrderForm
 from cart.cart import Cart
 from .models import Order, OrderItem
+from users.forms import RegisterForm
 
 
 class OrderView(generic.CreateView):
-    # template_name = 'order/order.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'order/order.html', context={})
+        return render(request, 'order/order.html', context={'form': RegisterForm})
 
     def post(self, request, *args, **kwargs):
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        mail = request.POST.get('mail')
-        delivery = request.POST.get('delivery')
-        city = request.POST.get('city')
-        address = request.POST.get('address')
-        pay = request.POST.get('pay')
-
         cart = Cart(request)
         if request.user.is_authenticated:
+            delivery = request.POST.get('delivery')
+            city = request.POST.get('city')
+            address = request.POST.get('address')
+            pay = request.POST.get('pay')
             order = Order.objects.create(user=request.user,
                                          city=city,
                                          address=address,
@@ -35,9 +31,6 @@ class OrderView(generic.CreateView):
                                       price=item['price'],
                                       quantity=item['quantity']) for item in cart]
             cart.clear()
-        else:
-            pass
-        print(name, phone, mail, delivery, city, address, pay)
         return render(request, 'order/order.html', context={})
 
 
