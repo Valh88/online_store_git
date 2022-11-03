@@ -4,6 +4,8 @@ from django.views import generic
 from cart.cart import Cart
 from .models import Order, OrderItem
 from users.forms import RegisterForm
+from .service import payment_orders_service
+from .tasks import check_payment
 
 
 class OrderView(generic.CreateView):
@@ -31,6 +33,7 @@ class OrderView(generic.CreateView):
                                       price=item['price'],
                                       quantity=item['quantity']) for item in cart]
             cart.clear()
+            check_payment.delay()
         return render(request, 'order/order.html', context={})
 
 
