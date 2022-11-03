@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  django_backend:
+    container_name: 'app'
+    build: ./online_store
+    command: gunicorn online_store.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./online_store/:/usr/src/app/
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+    expose:
+      - 8000
+    env_file:
+      - .env.prod
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13.0-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=online_store
+    env_file:
+      - .env.prod.db
+  nginx:
+    build: ./nginx
+    volumes:
+      - ./online_store/:/usr/src/app/
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+    ports:
+#      - 1337:80
+       - 8000:80
+    depends_on:
+      - django_backend
+  prometheus:
+    image: prom/prometheus:v2.2.1
+    volumes:
+      - ./prometheus/config.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:5.1.0
+    ports:
+      - 3000:3000
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:

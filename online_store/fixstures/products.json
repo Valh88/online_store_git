@@ -1,0 +1,319 @@
+[
+{
+  "model": "products.catalog",
+  "pk": 1,
+  "fields": {
+    "name": "food",
+    "select_group": false,
+    "is_active": true
+  }
+},
+{
+  "model": "products.catalog",
+  "pk": 2,
+  "fields": {
+    "name": "phone",
+    "select_group": true,
+    "is_active": true
+  }
+},
+{
+  "model": "products.catalog",
+  "pk": 3,
+  "fields": {
+    "name": "PC",
+    "select_group": true,
+    "is_active": true
+  }
+},
+{
+  "model": "products.catalog",
+  "pk": 4,
+  "fields": {
+    "name": "carts",
+    "select_group": false,
+    "is_active": true
+  }
+},
+{
+  "model": "products.catalog",
+  "pk": 5,
+  "fields": {
+    "name": "monitors",
+    "select_group": false,
+    "is_active": true
+  }
+},
+{
+  "model": "products.catalog",
+  "pk": 6,
+  "fields": {
+    "name": "blocks",
+    "select_group": false,
+    "is_active": true
+  }
+},
+{
+  "model": "products.photocatalog",
+  "pk": 1,
+  "fields": {
+    "photo": "catalog/food/cover_копия.jpg",
+    "catalog": 1
+  }
+},
+{
+  "model": "products.photocatalog",
+  "pk": 2,
+  "fields": {
+    "photo": "catalog/phone/cover_копия_4yEMfH1.jpg",
+    "catalog": 2
+  }
+},
+{
+  "model": "products.photocatalog",
+  "pk": 3,
+  "fields": {
+    "photo": "catalog/PC/cover_копия_4yEMfH1.jpg",
+    "catalog": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "catalog": 2,
+    "name": "model1",
+    "description": "dsadcv sdf",
+    "price": "1990.00",
+    "count": 5,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-18T06:35:42.156Z",
+    "updated": "2022-09-29T06:24:59.450Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "catalog": 2,
+    "name": "product2",
+    "description": "ddsfsdfdf",
+    "price": "480.00",
+    "count": 15,
+    "count_bay": 0,
+    "limited_edition": false,
+    "created": "2022-09-19T14:52:53.403Z",
+    "updated": "2022-09-27T12:29:56.279Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "catalog": 3,
+    "name": "ps1",
+    "description": "dasdfsdgfg",
+    "price": "1488.00",
+    "count": 7,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-27T11:28:56.820Z",
+    "updated": "2022-09-30T16:34:11.085Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "catalog": 1,
+    "name": "food1",
+    "description": "dssdfdsf",
+    "price": "344.00",
+    "count": 4,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-29T05:56:35.752Z",
+    "updated": "2022-09-29T05:56:35.752Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "catalog": 5,
+    "name": "product4",
+    "description": "классный продукт, достоинства, недостатки, все как положено",
+    "price": "6000.00",
+    "count": 10,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-30T16:29:35.342Z",
+    "updated": "2022-09-30T16:35:33.707Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "catalog": 5,
+    "name": "carts1",
+    "description": "норм товар",
+    "price": "3500.00",
+    "count": 8,
+    "count_bay": 0,
+    "limited_edition": false,
+    "created": "2022-09-30T16:30:25.303Z",
+    "updated": "2022-09-30T16:30:25.303Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "catalog": 4,
+    "name": "cats3434",
+    "description": "выапукпкеркв",
+    "price": "4600.00",
+    "count": 8,
+    "count_bay": 0,
+    "limited_edition": false,
+    "created": "2022-09-30T16:31:10.775Z",
+    "updated": "2022-09-30T16:31:10.775Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "catalog": 5,
+    "name": "monitor1",
+    "description": "описание",
+    "price": "3406.00",
+    "count": 6,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-30T16:39:32.676Z",
+    "updated": "2022-09-30T16:39:32.676Z"
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "catalog": 5,
+    "name": "monitor2",
+    "description": "описание",
+    "price": "2333.00",
+    "count": 5,
+    "count_bay": 0,
+    "limited_edition": true,
+    "created": "2022-09-30T16:40:11.358Z",
+    "updated": "2022-09-30T16:40:54.025Z"
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 1,
+  "fields": {
+    "photo": "products/1/photo/cover_копия_4yEMfH1.jpg",
+    "product": 1
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 2,
+  "fields": {
+    "photo": "products/1/photo/cover_копия_jAfse3K.jpg",
+    "product": 1
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 3,
+  "fields": {
+    "photo": "products/2/photo/cover_копия_oTAA5nt.jpg",
+    "product": 2
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 4,
+  "fields": {
+    "photo": "products/2/photo/cover_копия_uJYufnn.jpg",
+    "product": 2
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 5,
+  "fields": {
+    "photo": "products/3/photo/cover_копия.jpg",
+    "product": 3
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 6,
+  "fields": {
+    "photo": "products/4/photo/cover_копия.jpg",
+    "product": 4
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 7,
+  "fields": {
+    "photo": "products/4/photo/cover_копия_4yEMfH1.jpg",
+    "product": 4
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 8,
+  "fields": {
+    "photo": "products/6/photo/cover_копия_4yEMfH1.jpg",
+    "product": 6
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 9,
+  "fields": {
+    "photo": "products/6/photo/cover_копия_4yEMfH1_oDSzVrt.jpg",
+    "product": 6
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 10,
+  "fields": {
+    "photo": "products/5/photo/cover_копия_4yEMfH1.jpg",
+    "product": 5
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 11,
+  "fields": {
+    "photo": "products/7/photo/cover_копия_4yEMfH1.jpg",
+    "product": 7
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 12,
+  "fields": {
+    "photo": "products/8/photo/cover_копия_4yEMfH1.jpg",
+    "product": 8
+  }
+},
+{
+  "model": "products.photoproduct",
+  "pk": 13,
+  "fields": {
+    "photo": "products/9/photo/cover_копия_4yEMfH1.jpg",
+    "product": 9
+  }
+}
+]

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+<!--{% load cache %}-->
+<html xmlns="http://www.w3.org/1999/html">
+<body class="Site">
+{% block content %}
+  <div class="Middle Middle_top">
+    <div class="Middle-top">
+      <div class="wrap">
+        <div class="Middle-header">
+          <h1 class="Middle-title">Catalog Megano
+          </h1>
+          <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="{% url 'index' %}">home</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>Catalog</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="Section Section_column Section_columnLeft">
+      <div class="wrap">
+        <div class="Section-column">
+          <div class="Section-columnSection">
+            <header class="Section-header">
+              <strong class="Section-title">Filter
+              </strong>
+            </header>
+            <div class="Section-columnContent">
+              <form class="form" action="" method="post">{% csrf_token %}
+                <div class="form-group">
+                  <div class="range Section-columnRange">
+                    <input class="range-line" id="price" name="price" type="text" data-type="double" data-min="7" data-max="100000" data-from="{{ price_min }}" data-to="{{ price_max }}"/>
+                    <div class="range-price">Price:&#32;
+                      <div class="rangePrice">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input class="form-input form-input_full" id="title" name="title" type="text" placeholder="Название"/>
+                </div>
+                <div class="form-group">
+                  <!-- - var options = setOptions(items, ['value', 'selected', 'disabled']);-->
+                </div>
+                <div class="form-group">
+                  <label class="toggle">
+                    <input name="box" type="checkbox" {{ box }}/><span class="toggle-box" ></span><span class="toggle-text">Только товары в наличии</span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="toggle">
+                    <input type="checkbox" name="delivery" {{ delivery }}/><span class="toggle-box"></span><span class="toggle-text">С бесплатной доставкой</span>
+                  </label>
+                </div>
+                <div class="form-group">
+                  <div class="buttons"><button type="submit" class="btn btn_square btn_dark btn_narrow">Filter</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="Section-columnSection">
+            <header class="Section-header">
+              <strong class="Section-title">Popular tags
+              </strong>
+            </header>
+            {% cache 500 tags %}
+            <div class="Section-columnContent">
+              <div class="buttons">{% for tag in tags %}
+                <a class="btn btn_default btn_sm" href="{% url 'news_list_by_tag' tag.slug %}">{{ tag.name }}</a>{% endfor %}
+              </div>
+            </div>
+            {% endcache %}
+          </div>
+        </div>
+        <div class="Section-content">
+          <div class="Sort">
+            <div class="Sort-title">Сортировать по:
+            </div>
+            <div class="Sort-variants"><a class="Sort-sortBy Sort-sortBy_dec" href="#">Популярности</a><a class="Sort-sortBy" href="{% url 'sort_price' %}">Цене</a><a class="Sort-sortBy" href="#">Отзывам</a><a class="Sort-sortBy Sort-sortBy_inc" href="{% url 'sort_update' %}">Новизне</a>
+            </div>
+          </div>
+
+          <div class="Cards">{% for product in catalog %}  {% if product.photos.first %} {% cache 60 photo %}
+            <div class="Card"><a class="Card-picture" href="{% url 'product' product.pk %}"><img src="/media/{{ product.photos.first.photo }}" alt="card.jpg"/></a>
+              {% endcache %}
+              <div class="Card-content">
+                <strong class="Card-title"><a href="{% url 'product' product.pk %}">{{ product.name }}</a>
+                </strong>
+                <div class="Card-description">
+                  <div class="Card-cost"><span class="Card-price">{{ product.price }}₽</span>
+                  </div>
+                  <div class="Card-category">{{ product.catalog }}
+                  </div>
+
+                  {% comment %}
+                  <div class="Card-hover"><a class="Card-btn" href="#"><img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/></a>
+                  </div>{% endcomment %}
+
+                  <form action="{% url  'cart_add' product.id %}" method="post" id="form_cart" name="form_cart">{% csrf_token %}
+                        {{ form_add_cart }}
+                    <div class="Card-hover"><button class="Card-btn" type="submit"><img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+                      </button></div>
+                  </form>
+
+                </div>
+              </div>{% endif %}
+            </div>{% endfor %}
+
+          </div>
+          <div class="Pagination">
+            <div class="Pagination-ins">
+              {% if page_obj.has_previous %}
+              <a class="Pagination-element" href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="prevPagination.svg"/></a>
+              {% endif %}
+
+              <a class="Pagination-element Pagination-element_current" href="?page={{ page_obj.number }}"><span class="Pagination-text">{{ page_obj.number }}</span></a>
+
+              {% if page_obj.has_next %}
+              <a class="Pagination-element Pagination-element_prev" href="?page={{ page_obj.next_page_number }}"><img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="nextPagination.svg"/></a>
+
+            {% endif %}
+            </div>
+
+<!--            <div class="Pagination-ins">-->
+<!--              {% if page_obj.has_previous %}-->
+<!--              <a class="Pagination-element" href="?page={{ page_obj.previous_page_number }}"><img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="prevPagination.svg"/></a>-->
+<!--              {% endif %}-->
+<!--              {% for p in paginator.page_range %}-->
+<!--                  {% if page_obj.number == p %}-->
+<!--              <a class="Pagination-element Pagination-element_current" href="?page={{ p }}"><span class="Pagination-text">{{ p }}</span></a>-->
+<!--                  {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}-->
+<!--              <a class="Pagination-element" href="?page={{ p }}"><span class="Pagination-text">{{ p }}</span></a>-->
+<!--              {% endif %} {% endfor %}-->
+<!--              {% if page_obj.has_next %}-->
+<!--              <a class="Pagination-element Pagination-element_prev" href="?page={{ page_obj.next_page_number }}"><img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="nextPagination.svg"/></a>-->
+<!--              {% endif %}-->
+<!--            </div>-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body></html>

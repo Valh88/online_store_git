@@ -1,0 +1,74 @@
+[
+{
+  "model": "reviews.review",
+  "pk": 1,
+  "fields": {
+    "review": "eqwe",
+    "user": 2,
+    "name": "qwe",
+    "product": 2,
+    "email": "ewqe",
+    "created": "2022-09-21T11:19:35.103Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 2,
+  "fields": {
+    "review": "rwefhtyt",
+    "user": 2,
+    "name": "Vaasaqwe32 Vasjaqwe",
+    "product": 2,
+    "email": "test1@mail.ru",
+    "created": "2022-09-21T11:25:53.821Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 3,
+  "fields": {
+    "review": "dasdsad",
+    "user": 2,
+    "name": "Vaasaqwe32 Vasjaqwe",
+    "product": 1,
+    "email": "test1@mail.ru",
+    "created": "2022-09-23T09:02:04.356Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 4,
+  "fields": {
+    "review": "dsdasdsad",
+    "user": 2,
+    "name": "Vaasaqwe32 Vasjaqwe",
+    "product": 1,
+    "email": "test1@mail.ru",
+    "created": "2022-09-23T09:05:40.294Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 5,
+  "fields": {
+    "review": "dwadasd",
+    "user": null,
+    "name": "dasd",
+    "product": 2,
+    "email": "dasdsa@dsadasd.ru",
+    "created": "2022-09-23T09:51:10.669Z"
+  }
+},
+{
+  "model": "reviews.review",
+  "pk": 6,
+  "fields": {
+    "review": "werwq",
+    "user": null,
+    "name": "eqwe",
+    "product": 2,
+    "email": "qweqwe",
+    "created": "2022-09-23T09:51:57.202Z"
+  }
+}
+]
