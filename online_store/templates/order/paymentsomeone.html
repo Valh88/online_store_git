@@ -21,18 +21,19 @@
     </div>
     <div class="Section">
       <div class="wrap">
-        <form class="form Payment" action="#" method="post">
+        <form class="form Payment" action="{% url 'pay' %}" method="post">{% csrf_token %}
           <div class="Payment-card">
             <div class="form-group">
               <label class="form-label">Номер счета
               </label>
-              <input class="form-input Payment-bill" id="numero1" name="numero1" type="text" placeholder="9999 9999" data-mask="9999 9999" data-validate="require pay"/>
+              {{ form.num_card }}
             </div>
+            {{ form.order }}
             <div class="form-group"><a class="btn btn_success Payment-generate" href="#">Сгенирировать случайный счет</a>
             </div>
           </div>
-          <div class="Payment-pay"><a class="btn btn_primary" href="progressPayment.html">Оплатить</a>
-          </div>
+          <button class="Payment-pay"><p class="btn btn_primary" >Оплатить</p>
+          </button>
         </form>
       </div>
     </div>

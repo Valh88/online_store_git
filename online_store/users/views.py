@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, EmailForm
 from django.views import generic
-from .models import Profile
+from .models import Profile, User
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,8 +9,8 @@ from .forms import UpdateProfileForm
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
-
+from django.views.generic.base import TemplateView
+from django.views import View
 class RegisterView(generic.CreateView):
     form_class = RegisterForm
     template_name = 'users/register.html'
@@ -97,3 +97,22 @@ class HistoryDetailOrder(generic.DetailView, LoginRequiredMixin):
     def get_queryset(self):
         return self.request.user.orders.all()
 
+
+class RestorePassword(View):
+    template_name = 'users/restore_password.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = EmailForm()
+        return context
+
+    def get(self, request, *args, **kwargs):
+        # email = self.request.GET['email']
+        form = EmailForm(self.request.GET)
+        if form.is_valid():
+            user = User.objects.get(email=form.data.get('email'))
+        return render(request, template_name='users/restore_password.html', context={'form': form})
+
+
+# def restore_password(request):
+#     return render(request, template_name='users/restore_password.html', context={'form': EmailForm()})

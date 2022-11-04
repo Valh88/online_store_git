@@ -25,7 +25,7 @@ def cart_add(request, product_id):
         if cd['update']:
             return redirect('cart')
     return redirect(request.META.get('HTTP_REFERER'))
-    # return JsonResponse(data={'count': '3'}, status=200)
+    # return JsonResponse(data={}, status=200)
 
 
 def cart_remove(request, product_id):

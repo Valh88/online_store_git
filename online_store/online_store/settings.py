@@ -30,10 +30,11 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
-# docker-compose -f docker-compose.prod.yaml up -d --build
-# docker-compose -f docker-compose.prod.yaml logs -f
-# docker-compose exec db psql --username=django_user --dbname=django_db
-# docker-compose -f docker-compose.prod.yml exec web python manage.py migrate
+# docker-compose -f docker-compose.prod.yaml up -d --build create app
+# docker-compose -f docker-compose.prod.yaml logs -f logi docker compost
+# docker-compose exec db psql --username=django_user --dbname=django_db data db
+# docker-compose -f docker-compose.prod.yml exec <container_name> python manage.py migrate
+# docker-compose exec django_backend python3 manage.py migrate
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -108,6 +109,15 @@ DATABASES = {
 # docker-compose -f docker-compose.prod.yaml up -d --build
 # docker-compose -f docker-compose.prod.yaml logs -f
 # добавить ip в ALLOWED_HOSTS
+
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
+#     EMAIL_HOST = env('EMAIL_HOST') #smtp.yandex.ru
+#     EMAIL_PORT = env('EMAIL_PORT')
+#     EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+#     EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -213,12 +223,17 @@ REST_FRAMEWORK = {
     # ]
 }
 
-REDIS_HOST = '0.0.0.0'
-REDIS_PORT = '6379'
-CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+# REDIS_HOST = '0.0.0.0'
+# REDIS_PORT = '6379'
+# CELERY_BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+# CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
 
+#для докер_компост
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+#docker run -p 6379:6379 redis
+#celery -A online_store worker -l info

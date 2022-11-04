@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import RegisterView, UserLoginView, UserLogoutView, UserProfileView, UserUpdateView, \
-    ChangePasswordViewDone, ChangePasswordView, HistoryOrderList, HistoryDetailOrder
+    ChangePasswordViewDone, ChangePasswordView, HistoryOrderList, HistoryDetailOrder, RestorePassword
 from rest_framework import routers
 from .api import UserViewSet
 
@@ -19,4 +19,5 @@ urlpatterns = [
     path('profile/update/', UserUpdateView.as_view(), name='update_profile'),
     path('profile/password-change/', ChangePasswordView.as_view(), name='password_change'),
     path('profile/password-change/done/', ChangePasswordViewDone.as_view(), name='password_change_done'),
+    path('restore-password/', RestorePassword.as_view(), name='restore_password'),
 ] + router.urls

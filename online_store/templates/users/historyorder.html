@@ -44,9 +44,8 @@
             </div>
           </div>
         </div>
-        <div class="Section-content">
+        <div class="Section-content">{% for order in orders %}
           <div class="Orders">
-            {% for order in orders %}
             <div class="Order Order_anons">
               <div class="Order-personal">
                 <div class="row">
@@ -88,8 +87,8 @@
                 </div>
               </div>
             </div>
-            {% endfor %}
-          </div>
+
+          </div>{% endfor %}
         </div>
       </div>
     </div>

@@ -91,7 +91,14 @@
                           <div class="Order-infoContent">{{ order.status_pay_render }}
                           </div>
                         </div>
-                      </div>
+                        {% if order.status == 'e' %}
+                        <div class="Order-info Order-info_error">
+                          <div class="Order-infoType">Оплата не прошла:
+                          </div>
+                          <div class="Order-infoContent">{{ order.errors }}
+                          </div>
+                          {% endif %}
+                        </div>
                     </div> {% endwith %}
                   </div>
                   {% endif %}

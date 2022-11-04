@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from django.contrib.auth.models import User
-
+from .models import User
+from django.core.exceptions import ValidationError
 
 class RegisterForm(UserCreationForm):
     phone = forms.CharField(max_length=12, required=False)
@@ -30,3 +31,14 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('avatar', 'phone',)
+
+
+class EmailForm(forms.Form):
+    email = forms.EmailField()
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = User.objects.get(email=email)
+        if user is None:
+            raise forms.ValidationError('юзер с таким эмейл не зарегистрирован')
+

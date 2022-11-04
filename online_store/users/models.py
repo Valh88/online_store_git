@@ -25,6 +25,9 @@ class Profile(models.Model):
 
     image_tag.short_description = 'Avatar'
 
+    def restore_email(self):
+        pass
+
     class Meta:
         verbose_name = 'profile user'
         verbose_name_plural = 'profiles users'

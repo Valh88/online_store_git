@@ -80,7 +80,7 @@
           <div class="Sort">
             <div class="Sort-title">Сортировать по:
             </div>
-            <div class="Sort-variants"><a class="Sort-sortBy Sort-sortBy_dec" href="#">Популярности</a><a class="Sort-sortBy" href="{% url 'sort_price' %}">Цене</a><a class="Sort-sortBy" href="#">Отзывам</a><a class="Sort-sortBy Sort-sortBy_inc" href="{% url 'sort_update' %}">Новизне</a>
+            <div class="Sort-variants"><a class="Sort-sortBy" href="#">Популярности</a><a class="Sort-sortBy" href="{% url 'sort_price' %}">Цене</a><a class="Sort-sortBy" href="#">Отзывам</a><a class="Sort-sortBy" href="{% url 'sort_update' %}">Новизне</a>
             </div>
           </div>
 
@@ -109,8 +109,10 @@
                 </div>
               </div>{% endif %}
             </div>{% endfor %}
-
           </div>
+
+
+
           <div class="Pagination">
             <div class="Pagination-ins">
               {% if page_obj.has_previous %}
