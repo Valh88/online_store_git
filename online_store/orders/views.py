@@ -1,11 +1,13 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import generic
 from cart.cart import Cart
+from django.views.decorators.http import require_POST
 from .models import Order, OrderItem
 from users.forms import RegisterForm
-from .service import payment_orders_service
 from .tasks import check_payment
+from .forms import PaymentForm
 
 
 class OrderView(generic.CreateView):
@@ -33,9 +35,23 @@ class OrderView(generic.CreateView):
                                       price=item['price'],
                                       quantity=item['quantity']) for item in cart]
             cart.clear()
-            check_payment.delay()
+            form = PaymentForm(initial={'order': order.pk})
+            if pay == 'online':
+                return render(request, 'order/payment.html', context={'form': form})
+            else:
+                return render(request, 'order/paymentsomeone.html', context={'form': form})
         return render(request, 'order/order.html', context={})
 
 
-def order_view(request):
-    return render(request, 'order/order.html', context={})
+@require_POST
+def process_pay(request):
+    form = PaymentForm(request.POST)
+    if form.is_valid():
+        order = form.cleaned_data['order']
+        card = form.cleaned_data['num_card']
+        order = Order.objects.get(pk=order)
+        order_id = order.pk
+        price = order.price
+
+        check_payment.delay(card, order_id, price)
+        return HttpResponseRedirect(reverse('account'))

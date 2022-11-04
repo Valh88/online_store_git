@@ -11,7 +11,7 @@
           <h1 class="Middle-title">Оплата
           </h1>
           <ul class="breadcrumbs Middle-breadcrumbs">
-            <li class="breadcrumbs-item"><a href="index.html">home</a>
+            <li class="breadcrumbs-item"><a href="{% url 'index' %}">home</a>
             </li>
             <li class="breadcrumbs-item breadcrumbs-item_current"><span>Оплата</span>
             </li>
@@ -21,16 +21,17 @@
     </div>
     <div class="Section">
       <div class="wrap">
-        <form class="form Payment" action="#" method="post">
+        <form class="form Payment" action="{% url 'pay' %}" method="post">{% csrf_token %}
           <div class="Payment-card">
             <div class="form-group">
               <label class="form-label">Номер карты
               </label>
-              <input class="form-input Payment-bill" id="numero1" name="numero1" type="text" placeholder="9999 9999" data-mask="9999 9999" data-validate="require pay"/>
+              {{ form.num_card }}
             </div>
+            {{ form.order }}
           </div>
-          <div class="Payment-pay"><a class="btn btn_primary" href="progressPayment.html">Оплатить</a>
-          </div>
+          <button class="Payment-pay" type="submit"><p class="btn btn_primary">Оплатить</p>
+          </button>
         </form>
       </div>
     </div>

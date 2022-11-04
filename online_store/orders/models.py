@@ -28,6 +28,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=1, choices=STATUS_PAY, verbose_name='status pay', default='w')
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name='price', default=0)
+    errors = models.CharField(max_length=150, verbose_name='error', null=True, blank=True)
 
     def type_pay_render(self):
         if self.type_pay == 'o':
