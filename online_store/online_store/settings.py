@@ -26,7 +26,7 @@ env.read_env('../.env')
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = env("DEBUG", bool)
 
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 # Application definition
