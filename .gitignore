@@ -134,7 +134,7 @@ dmypy.json
 .idea
 
 media/
-static/
+
 
 online_store/orders/migrations/__pycache__/0013_order_errors.cpython-310.pyc
 online_store/cart/__pycache__/views.cpython-310.pyc
