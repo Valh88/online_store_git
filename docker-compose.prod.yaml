@@ -20,8 +20,8 @@ services:
     command: gunicorn online_store.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./online_store/:/usr/src/app/
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
+      - ./static_volume:/usr/src/app/static
+      - ./media_volume:/usr/src/app/media
     expose:
       - 8000
     env_file:
@@ -33,9 +33,9 @@ services:
   nginx:
     build: ./nginx
     volumes:
-      - ./online_store/:/usr/src/app/
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
+      # - ./online_store/:/usr/src/app/
+      - ./static_volume:/usr/src/app/static
+      - ./media_volume:/usr/src/app/media
     ports:
 #      - 1337:80
        - 8000:80
