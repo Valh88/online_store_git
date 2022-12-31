@@ -76,12 +76,19 @@ class ProductListView(generic.ListView):
             box = 'checked'
         if delivery:
             delivery = 'checked'
-        return render(request, 'products/catalog.html', context={'catalog': catalog,
-                                                                 'form_add_cart': form,
-                                                                 'box': box,
-                                                                 'delivery': delivery,
-                                                                 'price_min': price[0],
-                                                                 'price_max': price[1]})
+            
+        # return render(request, 'products/catalog.html', context={'catalog': catalog,
+        #                                                          'form_add_cart': form,
+        #                                                          'box': box,
+        #                                                          'delivery': delivery,
+        #                                                          'price_min': price[0],
+        #                                                          'price_max': price[1]})
+        return render(request, 'include/product_list.html', context={'catalog': catalog,
+                                                                    'form_add_cart': form,
+                                                                    'box': box,
+                                                                    'delivery': delivery,
+                                                                    'price_min': price[0],
+                                                                    'price_max': price[1]})
 
 
 class ProductDetailView(generic.DetailView):

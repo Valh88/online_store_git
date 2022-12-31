@@ -1,0 +1,21 @@
+{% load static%}
+{% load cache %}
+{% for product in catalog %}  {% if product.photos.first %} {% cache 60 photo %}
+    <div class="Card"><a class="Card-picture" href="{% url 'product' product.pk %}"><img src="/media/{{ product.photos.first.photo }}" alt="card.jpg"/></a>
+      {% endcache %}
+      <div class="Card-content">
+        <strong class="Card-title"><a href="{% url 'product' product.pk %}">{{ product.name }}</a>
+        </strong>
+        <div class="Card-description">
+          <div class="Card-cost"><span class="Card-price">{{ product.price }}₽</span>
+          </div>
+          <div class="Card-category">{{ product.catalog }}
+          </div>
+          <form action="{% url  'cart_add' product.id %}" method="post" id="form_cart" name="form_cart">{% csrf_token %}
+                {{ form_add_cart }}
+            <div class="Card-hover"><button class="Card-btn" type="submit"><img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+              </button></div>
+          </form>
+        </div>
+      </div>{% endif %}
+    </div>{% endfor %}
