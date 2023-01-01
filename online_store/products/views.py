@@ -77,18 +77,7 @@ class ProductListView(generic.ListView):
         if delivery:
             delivery = 'checked'
             
-        # return render(request, 'products/catalog.html', context={'catalog': catalog,
-        #                                                          'form_add_cart': form,
-        #                                                          'box': box,
-        #                                                          'delivery': delivery,
-        #                                                          'price_min': price[0],
-        #                                                          'price_max': price[1]})
-        return render(request, 'include/product_list.html', context={'catalog': catalog,
-                                                                    'form_add_cart': form,
-                                                                    'box': box,
-                                                                    'delivery': delivery,
-                                                                    'price_min': price[0],
-                                                                    'price_max': price[1]})
+        return render(request, 'include/product_list.html', context={'catalog': catalog})
 
 
 class ProductDetailView(generic.DetailView):
@@ -123,6 +112,11 @@ def category_product(request, cat_name):
 def tag_render(request, tag_slug=None):
     products = Product.objects.select_related('catalog').all()
     tag = None
+    tag = request.GET.get('tag')
+    if tag:
+        tag = get_object_or_404(Tag, slug=tag)
+        products = products.filter(tags=tag)
+        return render(request, template_name='include/product_list.html', context={'catalog': products})
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)

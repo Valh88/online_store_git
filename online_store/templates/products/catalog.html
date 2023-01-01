@@ -69,8 +69,8 @@
             </header>
             {% cache 500 tags %}
             <div class="Section-columnContent">
-              <div class="buttons">{% for tag in tags %}
-                <a class="btn btn_default btn_sm" href="{% url 'news_list_by_tag' tag.slug %}">{{ tag.name }}</a>{% endfor %}
+              <div class="buttons">
+                {% include 'include/tags_list.html' %} 
               </div>
             </div>
             {% endcache %}

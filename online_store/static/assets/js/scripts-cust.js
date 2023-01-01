@@ -32,16 +32,33 @@ $.ajaxSetup({
 $(document).on("click", ".btn_narrow", function(e) {
     e.preventDefault()
     let form = $('#filter_product')
-    console.log( form.serialize() )
     $.ajax({
         type: form.attr('method'),
         url: form.action,
         data: form.serialize(),
         success: function(data) {
             // console.log(data)
+            // history.pushState(null, null, 'start')
             $('.Card').remove()
             $("div.Cards").append(data);
+            // window.addEventListener('popstate', function(e) {
+            //     window.history.back() 
+            // })
         }
     })
 })
 
+$(document).on("click", ".btn_default", function(e) {
+    e.preventDefault()
+    let link = $(this)
+    $.ajax({
+        type: 'GET',
+        url: link.attr("href"),
+        data: {'tag': link.html()},
+        success: function(data) {
+            $('.Card').remove()
+            $("div.Cards").append(data);
+        }
+    })
+    history.pushState(null, null, link.attr("href"))
+})
